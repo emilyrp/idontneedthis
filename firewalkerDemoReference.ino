@@ -39,8 +39,8 @@ Adafruit_NeoPixel strip = Adafruit_NeoPixel(N_LEDS, LED_PIN, NEO_GRB + NEO_KHZ80
 // The readings from the sensors are usually around 250-350 when not being pressed,
 // then dip below 100 when the heel is standing on it (for Phil's shoes; Becky's
 // don't dip quite as low because she's smaller).
-#define STEP_TRIGGER    200  // Reading must be below this to trigger step
-#define STEP_HYSTERESIS 250  // After trigger, must return to this level
+#define STEP_TRIGGER    400  // Reading must be below this to trigger step
+#define STEP_HYSTERESIS 550  // After trigger, must return to this level
 
 int
   stepMag[MAXSTEPS],  // Magnitude of steps
@@ -51,7 +51,6 @@ int
   stepMin;            // Minimum reading during current step
 uint8_t
   stepNum = 0;        // Current step number in stepMag/stepX tables
-  //dup[SHOE_LEN_LEDS]; // Inside/outside copy indexes
 boolean
   stepping  = false;  // If set, step was triggered, waiting to release
 
@@ -59,16 +58,6 @@ boolean
 void setup() {
   
   pinMode(9, INPUT_PULLUP); // Set internal pullup resistor for sensor pin
-  // As previously mentioned, the step animation is mirrored on the inside and
-  // outside faces of the shoe.  To avoid a bunch of math and offsets later, the
-  // 'dup' array indicates where each pixel on the outside face of the shoe should
-  // be copied on the inside.  (255 = don't copy, as on front- or rear-most LEDs).
-  // Later, the colors for the outside face of the shoe are calculated and then get
-  // copied to the appropriate positions on the inside face.
-  //memset(dup, 255, sizeof(dup));
-  //int8_t a, b;
-  //for(a=1              , b=SHOE_LED_BACK-1            ; b>=0    ;) dup[a++] = b--;
-  //for(a=SHOE_LEN_LEDS-2, b=SHOE_LED_BACK+SHOE_LEN_LEDS; b<N_LEDS;) dup[a--] = b++;
 
   // Clear step magnitude and position buffers
   memset(stepMag, 0, sizeof(stepMag));
@@ -159,11 +148,8 @@ void loop() {
     }
     // Set R/G/B color along outside of shoe
     strip.setPixelColor(i, r, g, b);
-    // Pixels along inside are funny...
-   // j = dup[i];
-   // if(j < 255) strip.setPixelColor(j, r, g, b);
   }
 
   strip.show();
-  delayMicroseconds(1500);
+  delayMicroseconds(2500);
 }
