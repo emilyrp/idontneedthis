@@ -1,7 +1,6 @@
 // 'Firewalker' LED sneakers sketch for Adafruit NeoPixels by Phillip Burgess
-
+/*
 #include <Adafruit_NeoPixel.h>
-//#include <Firewalker.h>
 
 
 uint8_t gamma[] PROGMEM = { // Gamma correction table for LED brightness
@@ -152,4 +151,4 @@ void loop() {
 
   strip.show();
   delayMicroseconds(2500);
-}
+}*/
