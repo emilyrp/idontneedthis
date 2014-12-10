@@ -27,16 +27,16 @@ void setup() {
 
 void loop() {
   // Read step value from analog pin
-  firewalker.readStepValue();
+  firewalker.updateSensorValue();
   
   // Print analog input to serial port
-  Serial.println(firewalker.getStepValue());
+  Serial.println(firewalker.getSensorValue());
   
   // Add a short delay
   delay(200);
 }
 ```
-* Choose the correct board (Tools->Board->Arduino Flora) and serial port (Tools->Board-><something with usb>),
+* Choose the correct board (Tools->Board->Arduino Flora) and serial port (Tools->Port->something with USB),
 and run the sketch.
 * Open the Serial Monitor (Tools->Serial Monitor) to read values from the velostat sensor. Try pressing/stepping
 on the sensor to determine what the "step on threshold" and "step off threshold" values are for you!
